@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #050505;
+  font-family: 'Oswald', sans-serif;
+  user-select: none;
+}
+
+#gameContainer {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Vignette effect for that gritty gangster vibe */
+#gameContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+  z-index: 10;
+}
+
+#hud {
+  grid-row: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  z-index: 20;
+  pointer-events: none;
+  text-shadow: 2px 2px 0px #000, 0 0 10px rgba(255,255,255,0.5);
+}
+
+.hud-left, .hud-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hud-right {
+  align-items: flex-end;
+}
+
+#warning-message {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ff2a2a;
+  font-size: 40px;
+  font-weight: 700;
+  text-shadow: 0 0 10px #000, 0 0 20px #ff2a2a;
+  display: none;
+  animation: blink 0.5s infinite;
+  z-index: 25;
+  pointer-events: none;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+#start-screen, #game-over-screen {}
+#start-btn, #restart-btn {}
+
+#speedometer {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  font-style: italic;
+}
+
+#health-bar-container {
+  width: 200px;
+  height: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#health-bar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff0000, #ff5500);
+  transition: width 0.2s ease-out;
+}
+
+#wanted-level {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ff2a2a;
+  letter-spacing: 2px;
+}
+
+#score {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+#playfield {
+  grid-row: 1 / -1;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+#playfield canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#ui-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+}
+
+#ui-layer > * {
+  pointer-events: auto;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.menu-box {
+  background: linear-gradient(135deg, #111, #222);
+  border: 2px solid #444;
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(255, 42, 42, 0.2);
+  max-width: 500px;
+  width: 90%;
+}
+
+.menu-box h1 {
+  margin: 0 0 10px 0;
+  font-size: 48px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.menu-box p {
+  color: #aaa;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.controls-info {
+  background: rgba(0,0,0,0.5);
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.controls-info p {
+  margin: 10px 0;
+  color: #ccc;
+  font-size: 16px;
+}
+
+.controls-info span {
+  background: #fff;
+  color: #000;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+button {
+  background: #ff2a2a;
+  color: #fff;
+  border: none;
+  padding: 15px 40px;
+  font-size: 24px;
+  font-weight: 700;
+  font-family: 'Oswald', sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #990000;
+}
+
+button:hover {
+  background: #ff4d4d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #990000, 0 0 15px rgba(255, 42, 42, 0.6);
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #990000;
+}
+
+#game-over-title {
+  color: #ff2a2a;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+
+#final-score {
+  font-size: 24px;
+  color: #ffd700;
+  font-weight: bold;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Midnight Pursuit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="gameContainer">
+    <div id="hud">
+      <div id="warning-message">⚠️ POLICE APPROACHING ⚠️</div>
+      <div class="hud-left">
+        <div id="speedometer">0 MPH</div>
+        <div id="health-bar-container">
+          <div id="health-bar"></div>
+        </div>
+      </div>
+      <div class="hud-right">
+        <div id="wanted-level">WANTED: ★☆☆☆☆</div>
+        <div id="score">CASH: $0</div>
+      </div>
+    </div>
+
+    <div id="playfield"></div>
+
+    <div id="ui-layer">
+      <div id="start-screen" class="overlay">
+        <div class="menu-box">
+          <h1>MIDNIGHT PURSUIT</h1>
+          <p>The cops are on your tail. Don't get busted.</p>
+          <div class="controls-info">
+            <p><span>[W]</span> / <span>[S]</span> : Accelerate / Brake</p>
+            <p><span>[A]</span> / <span>[D]</span> : Steer Left / Right</p>
+            <p><span>[SPACE]</span> : Drift / Handbrake</p>
+          </div>
+          <button id="start-btn">DRIVE</button>
+        </div>
+      </div>
+      <div id="game-over-screen" class="overlay" style="display: none;">
+        <div class="menu-box">
+          <h1 id="game-over-title">BUSTED</h1>
+          <p id="final-score">CASH: $0</p>
+          <button id="restart-btn">TRY AGAIN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="crashSound" preload="auto" loop>
+  <source src="crash.mp3" type="audio/mpeg">
+  </audio>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.182.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.182.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    window.THREE = THREE;
+  </script>
+  <script src="GameObject3D.js"></script>
+  <script src="Car.js"></script>
+  <script src="PlayerCar.js"></script>
+  <script src="PoliceCar.js"></script>
+  <script src="TrafficCar.js"></script>
+  <script src="RoadChunk.js"></script>
+  <script src="Game.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      const game = new Game();
+      window.game = game;
+    });
+  </script>
+</body>
+</html>
